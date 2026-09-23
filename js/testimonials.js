@@ -28,9 +28,13 @@ async function hashPasscode(text) {
 }
 window.hashPasscode = hashPasscode;
 
-function starString(rating) {
+function starRow(rating) {
   const n = Math.max(1, Math.min(5, Math.round(rating || 5)));
-  return "★".repeat(n) + "☆".repeat(5 - n);
+  let out = "";
+  for (let i = 0; i < 5; i++) {
+    out += i < n ? icon("star", "star-filled") : icon("starOutline", "star-empty");
+  }
+  return out;
 }
 
 function renderTestimonials(list) {
@@ -41,14 +45,15 @@ function renderTestimonials(list) {
   }
   grid.innerHTML = list
     .map(
-      (t) => `
-      <div class="testi-card">
-        <div class="testi-stars">${starString(t.rating)}</div>
+      (t, i) => `
+      <div class="testi-card reveal" style="transition-delay:${Math.min(i, 8) * 80}ms">
+        <div class="testi-stars">${starRow(t.rating)}</div>
         <p class="testi-text">"${escapeHtml(t.text)}"</p>
         <p class="testi-who"><b>${escapeHtml(t.name)}</b>${t.role ? " — " + escapeHtml(t.role) : ""}${t.example ? " (example)" : ""}</p>
       </div>`
     )
     .join("");
+  if (window.observeReveal) window.observeReveal(grid);
 }
 
 function escapeHtml(str) {

@@ -28,7 +28,9 @@
       </ul>
       <div class="nav-actions">
         <a href="#contact" class="btn btn-primary btn-sm">Get in touch</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+        </button>
       </div>
     </nav>
   </header>
@@ -71,8 +73,8 @@
             <div class="hero-meta" id="heroMeta"></div>
 
             <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">Book a Consultation ↗</a>
-              <a href="#experience" class="btn btn-ghost">More About Me ↗</a>
+              <a href="#contact" class="btn btn-primary">Book a Consultation <span class="icon btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></span></a>
+              <a href="#experience" class="btn btn-ghost">More About Me <span class="icon btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></span></a>
             </div>
           </div>
         </div>
@@ -99,13 +101,13 @@
     <!-- Experience -->
     <section id="experience">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="eyebrow">Career</p>
           <h2>Professional experience</h2>
         </div>
         <div class="timeline" id="experienceTimeline"></div>
 
-        <div class="section-head" style="margin-top:64px;">
+        <div class="section-head reveal" style="margin-top:64px;">
           <p class="eyebrow">Clinical exposure</p>
           <h2>Attachments &amp; observerships</h2>
         </div>
@@ -116,7 +118,7 @@
     <!-- Achievements -->
     <section id="achievements">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="eyebrow">Impact</p>
           <h2>Key achievements</h2>
         </div>
@@ -127,7 +129,7 @@
     <!-- Credentials -->
     <section id="credentials">
       <div class="wrap">
-        <div class="section-head">
+        <div class="section-head reveal">
           <p class="eyebrow">Credentials</p>
           <h2>Education, licensing &amp; development</h2>
         </div>
@@ -192,7 +194,7 @@
   <!-- Admin: passcode gate -->
   <div class="modal-backdrop" id="passcodeModal" hidden>
     <div class="modal">
-      <button class="modal-close" data-close>&times;</button>
+      <button class="modal-close" data-close aria-label="Close"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></button>
       <h3>Doctor login</h3>
       <p class="sub">Enter your passcode to manage testimonials. This gate is basic client-side protection — see README for how it works.</p>
       <div class="field">
@@ -210,7 +212,7 @@
   <!-- Admin: manage testimonials -->
   <div class="modal-backdrop" id="adminModal" hidden>
     <div class="modal">
-      <button class="modal-close" data-close>&times;</button>
+      <button class="modal-close" data-close aria-label="Close"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></button>
       <h3>Add a testimonial</h3>
       <p class="sub">Saved straight to your Google Sheet — visible on the site the next time it loads.</p>
       <div class="field">
@@ -241,6 +243,7 @@
     </div>
   </div>
 
+  <script src="js/icons.js"></script>
   <script src="js/data.js"></script>
   <script src="js/config.js"></script>
   <script src="js/testimonials.js"></script>
