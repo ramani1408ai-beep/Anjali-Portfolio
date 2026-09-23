@@ -11,6 +11,12 @@ function renderHero() {
   document.getElementById("heroRole").textContent = `${p.title} · ${p.focus}`;
   document.getElementById("heroTagline").textContent = p.tagline;
 
+  const satStat = SITE_DATA.stats.find((s) => /satisfaction/i.test(s.label));
+  if (satStat) {
+    const badge = document.getElementById("heroRatingBadge");
+    badge.innerHTML = `<strong>${satStat.value}</strong><span>${satStat.label}</span>`;
+  }
+
   const meta = document.getElementById("heroMeta");
   meta.innerHTML = `
     <span>📍 ${p.location}</span>

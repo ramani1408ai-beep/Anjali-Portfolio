@@ -21,9 +21,9 @@ Then open `http://localhost:5500`.
 
 ## Add your photo
 
-Drop a file at `assets/images/profile.jpg` (see `assets/images/README.md` for
+Drop a file at `assets/images/Profile.jpeg` (see `assets/images/README.md` for
 sizing). Until it exists, a clean placeholder with your initials is shown
-instead — nothing breaks.
+instead — nothing breaks. (Her current portrait is already in place.)
 
 ## Edit the text
 

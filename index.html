@@ -36,28 +36,44 @@
   <main id="top">
     <!-- Hero -->
     <section class="hero">
-      <div class="wrap hero-grid">
-        <div>
-          <p class="eyebrow">DHA-Licensed General Practitioner</p>
-          <h1 id="heroName">Dr. Anjali C</h1>
-          <p class="role" id="heroRole">Primary Care · Women's Health · Emergency Medicine</p>
-          <p class="tagline" id="heroTagline"></p>
+      <div class="wrap">
+        <div class="hero-stage">
+          <div class="hero-bgshape" aria-hidden="true"></div>
 
-          <div class="hero-meta" id="heroMeta"></div>
-
-          <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Book a consultation</a>
-            <a href="#experience" class="btn btn-ghost">View experience</a>
+          <div class="hero-secondary-card" aria-hidden="true">
+            <p>Compassionate Care, Built Around You</p>
+            <span>Evidence-based primary, women's health &amp; emergency medicine.</span>
           </div>
-        </div>
 
-        <div class="hero-portrait">
-          <!-- Drop your photo in as assets/images/profile.jpg — it will replace this placeholder automatically. -->
-          <img src="assets/images/profile.jpg" alt="Portrait of Dr. Anjali C"
-               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-          <div class="portrait-fallback" style="display:flex;">
-            <span class="initials">AC</span>
-            <small>Add assets/images/profile.jpg to show your photo here</small>
+          <div class="hero-portrait-col">
+            <span class="hero-ghost-text" aria-hidden="true">ANJALI</span>
+            <div class="hero-portrait-frame">
+              <!-- Drop your photo in as assets/images/Profile.jpeg — it will replace this placeholder automatically. -->
+              <img src="assets/images/Profile.jpeg" alt="Portrait of Dr. Anjali C"
+                   onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+              <div class="portrait-fallback" style="display:none;">
+                <span class="initials">AC</span>
+                <small>Add assets/images/Profile.jpeg to show your photo here</small>
+              </div>
+            </div>
+            <div class="hero-float-badge rating" id="heroRatingBadge">
+              <strong>95%</strong>
+              <span>Patient satisfaction rating</span>
+            </div>
+          </div>
+
+          <div class="hero-content">
+            <p class="hero-hey">Hey, this is</p>
+            <h1 id="heroName">Dr. Anjali C</h1>
+            <p class="role" id="heroRole">Primary Care · Women's Health · Emergency Medicine</p>
+            <p class="tagline" id="heroTagline"></p>
+
+            <div class="hero-meta" id="heroMeta"></div>
+
+            <div class="hero-actions">
+              <a href="#contact" class="btn btn-primary">Book a Consultation ↗</a>
+              <a href="#experience" class="btn btn-ghost">More About Me ↗</a>
+            </div>
           </div>
         </div>
       </div>
