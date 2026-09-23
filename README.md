@@ -33,8 +33,9 @@ refresh the page — no HTML editing required.
 ## Connect Google Sheets (testimonials)
 
 Testimonials are stored in a Google Sheet. Both the sheet itself (typed in
-directly) and the site's doctor-only "Manage testimonials" panel write to the
-**same** sheet, through one small Google Apps Script backend.
+directly) and the site's public "Write a review" form write to the **same**
+sheet, through one small Google Apps Script backend. Anyone can submit a
+review from the site — there's no login, and it publishes immediately.
 
 1. **Create the sheet.** Go to [sheets.google.com](https://sheets.google.com),
    create a new spreadsheet named e.g. "Anjali Portfolio Testimonials". You
@@ -49,18 +50,12 @@ directly) and the site's doctor-only "Manage testimonials" panel write to the
    `Anjali Testimonials` the first time it runs — that tab name is set by the
    `SHEET_NAME` constant near the top of `Code.gs`, and is unrelated to what
    you named the spreadsheet **file** in step 1. All testimonial rows —
-   whether typed in directly or added through the site's admin panel — must
+   whether typed in directly or added through the site's review form — must
    live in that exact tab, or they won't show up on the site. If you ever
-   change `SHEET_NAME`, you must also redeploy (see step 4's note on
+   change `SHEET_NAME`, you must also redeploy (see the next step's note on
    redeploying after code changes) before it takes effect.
 
-3. **Set your admin passcode.** Pick one passcode (e.g. a short phrase only
-   you know). In the Apps Script editor: `Project Settings` (gear icon, left
-   sidebar) → `Script Properties` → `Add script property` → name it
-   `ADMIN_TOKEN`, value = your passcode, exactly as you'll type it on the
-   site. Save.
-
-4. **Deploy as a web app.** Back in the Apps Script editor: `Deploy → New
+3. **Deploy as a web app.** Back in the Apps Script editor: `Deploy → New
    deployment` → gear icon next to "Select type" → `Web app`. Set:
    - Execute as: **Me**
    - Who has access: **Anyone**
@@ -74,35 +69,24 @@ directly) and the site's doctor-only "Manage testimonials" panel write to the
    `Deploy → Manage deployments`, click the pencil icon on your deployment,
    set Version to **New version**, then `Deploy` again.
 
-5. **Wire it into the site.** Open `js/config.js` and paste the URL into
+4. **Wire it into the site.** Open `js/config.js` and paste the URL into
    `testimonialsApiUrl`.
-
-6. **Hash your passcode for the site.** Open the site in a browser, press
-   `F12` to open the console, and run:
-
-   ```js
-   await hashPasscode("your-chosen-passcode")
-   ```
-
-   Copy the printed hash into `js/config.js` → `adminPasscodeHash`.
 
 That's it. Now:
 - **Editing the sheet directly** (typing a new row with `Status = approved`)
   makes a testimonial appear on the site on next load.
-- **The "Doctor: manage testimonials" button** on the site (also in the
-  footer as "Doctor login") lets you add one from the UI — it's the same
-  sheet, entries are auto-marked `approved`.
+- **The "Write a review" button** on the site opens a form (with a star
+  picker for the rating) that anyone can submit — it writes to the same
+  sheet, auto-marked `approved`, and shows up immediately.
 
-### About the doctor-only gate
+### About moderation
 
-The site's passcode prompt is a convenience gate, not a security system — it
-runs entirely in the visitor's browser, so treat it as "keeps casual visitors
-out," not "cryptographically secure." The part that actually protects your
-data is server-side: the Apps Script `doPost` function only accepts new
-testimonials when the request includes the exact `ADMIN_TOKEN` you set in
-step 3 — a stranger can't write to your sheet even if they inspect the
-site's code. Change the passcode any time by repeating steps 3 and 6 with a
-new value.
+There's no login and no approval step — anything submitted through the site
+publishes right away. If you'd rather review submissions before they go
+live, change `Status: "approved"` to `Status: "pending"` in `doPost` inside
+`apps-script/Code.gs` (redeploy after editing — see the note above), and
+update the `doGet` filter or manually flip each row's `Status` to `approved`
+in the sheet when you're ready to publish it.
 
 ## Deploy to GitHub Pages
 
@@ -116,7 +100,7 @@ branch → main / (root)`. The site will be live at
 index.html              Page markup (content is injected by js/main.js)
 css/style.css            All styling, light + dark mode
 js/data.js                CV content — edit this to change any text
-js/config.js               Google Sheet connection + admin passcode hash
+js/config.js               Google Sheet connection URL
 js/testimonials.js          Fetch/render/add testimonials
 js/main.js                  Renders data.js into the page, nav, init
 apps-script/Code.gs            Google Apps Script backend (paste into Sheets)

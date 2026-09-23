@@ -238,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderContact();
   setupNav();
   setupHeaderScroll();
-  setupAdminUI();
+  setupReviewUI();
   setupParallax();
   loadTestimonials();
   initRevealObserver();

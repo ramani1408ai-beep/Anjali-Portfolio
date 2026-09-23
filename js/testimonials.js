@@ -1,5 +1,6 @@
 // Testimonials: reads from the Google Sheet (via the Apps Script Web App
-// configured in config.js) and lets the doctor add new ones from the UI.
+// configured in config.js) and lets any visitor add one from the UI —
+// submissions publish immediately, no login required.
 // See README.md → "Connect Google Sheets" for setup.
 
 const SAMPLE_TESTIMONIALS = [
@@ -14,19 +15,10 @@ const SAMPLE_TESTIMONIALS = [
     name: "Sample patient",
     role: "Example — replace by connecting Google Sheets",
     rating: 5,
-    text: "Once connected, testimonials added in the spreadsheet or through the doctor-only panel below will appear here automatically.",
+    text: "Once connected, testimonials added in the spreadsheet or through the review form below will appear here automatically.",
     example: true,
   },
 ];
-
-async function hashPasscode(text) {
-  const enc = new TextEncoder().encode(text);
-  const digest = await crypto.subtle.digest("SHA-256", enc);
-  return Array.from(new Uint8Array(digest))
-    .map((b) => b.toString(16).padStart(2, "0"))
-    .join("");
-}
-window.hashPasscode = hashPasscode;
 
 function starRow(rating) {
   const n = Math.max(1, Math.min(5, Math.round(rating || 5)));
@@ -81,57 +73,48 @@ async function loadTestimonials() {
   }
 }
 
-// ---------- Admin panel ----------
+// ---------- Write a review ----------
 
-const passcodeModal = () => document.getElementById("passcodeModal");
-const adminModal = () => document.getElementById("adminModal");
+const reviewModal = () => document.getElementById("reviewModal");
 
 function openModal(el) { el.hidden = false; }
 function closeModal(el) { el.hidden = true; }
 
-function setupAdminUI() {
-  document.getElementById("openAdminBtn").addEventListener("click", () => openModal(passcodeModal()));
-  document.getElementById("openAdminLinkBtn").addEventListener("click", () => openModal(passcodeModal()));
+function setupStarPicker() {
+  const picker = document.getElementById("tRatingPicker");
+  const hiddenInput = document.getElementById("tRating");
+  const buttons = [...picker.querySelectorAll(".star-btn")];
+
+  function setSelected(val) {
+    buttons.forEach((b) => {
+      const selected = Number(b.dataset.value) === val;
+      b.classList.toggle("selected", selected);
+      b.setAttribute("aria-checked", String(selected));
+    });
+    hiddenInput.value = val;
+  }
+
+  buttons.forEach((b) => {
+    b.addEventListener("click", () => setSelected(Number(b.dataset.value)));
+  });
+
+  setSelected(Number(hiddenInput.value) || 5);
+}
+
+function setupReviewUI() {
+  setupStarPicker();
+
+  document.getElementById("openReviewBtn").addEventListener("click", () => openModal(reviewModal()));
 
   document.querySelectorAll("[data-close]").forEach((btn) => {
     btn.addEventListener("click", (e) => closeModal(e.target.closest(".modal-backdrop")));
   });
-  [passcodeModal(), adminModal()].forEach((backdrop) => {
-    backdrop.addEventListener("click", (e) => {
-      if (e.target === backdrop) closeModal(backdrop);
-    });
-  });
-
-  document.getElementById("passcodeSubmit").addEventListener("click", async () => {
-    const status = document.getElementById("passcodeStatus");
-    const entered = document.getElementById("passcodeInput").value;
-
-    if (!SITE_CONFIG.adminPasscodeHash) {
-      status.textContent = "Admin passcode isn't set up yet — see README.md → 'Connect Google Sheets'.";
-      status.className = "modal-status error";
-      return;
-    }
-    const hash = await hashPasscode(entered);
-    if (hash === SITE_CONFIG.adminPasscodeHash) {
-      sessionStorage.setItem("adminToken", entered);
-      status.textContent = "";
-      status.className = "modal-status";
-      document.getElementById("passcodeInput").value = "";
-      closeModal(passcodeModal());
-      openModal(adminModal());
-    } else {
-      status.textContent = "Incorrect passcode.";
-      status.className = "modal-status error";
-    }
-  });
-
-  document.getElementById("passcodeInput").addEventListener("keydown", (e) => {
-    if (e.key === "Enter") document.getElementById("passcodeSubmit").click();
+  reviewModal().addEventListener("click", (e) => {
+    if (e.target === reviewModal()) closeModal(reviewModal());
   });
 
   document.getElementById("tSubmit").addEventListener("click", async () => {
     const status = document.getElementById("adminStatus");
-    const token = sessionStorage.getItem("adminToken");
     const name = document.getElementById("tName").value.trim();
     const role = document.getElementById("tRole").value.trim();
     const rating = document.getElementById("tRating").value;
@@ -143,7 +126,7 @@ function setupAdminUI() {
       return;
     }
     if (!name || !text) {
-      status.textContent = "Please fill in a name and the testimonial text.";
+      status.textContent = "Please fill in your name and a review.";
       status.className = "modal-status error";
       return;
     }
@@ -155,18 +138,18 @@ function setupAdminUI() {
       const res = await fetch(SITE_CONFIG.testimonialsApiUrl, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ token, name, role, rating, text }),
+        body: JSON.stringify({ name, role, rating, text }),
       });
       const data = await res.json();
       if (data.ok) {
-        status.textContent = "Testimonial added.";
+        status.textContent = "Thank you — your review is live!";
         status.className = "modal-status success";
         document.getElementById("tName").value = "";
         document.getElementById("tRole").value = "";
         document.getElementById("tText").value = "";
         await loadTestimonials();
       } else {
-        status.textContent = data.error || "Couldn't save — check your passcode/token setup.";
+        status.textContent = data.error || "Couldn't save — please try again.";
         status.className = "modal-status error";
       }
     } catch (err) {

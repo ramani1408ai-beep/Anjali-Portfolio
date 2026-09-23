@@ -5,10 +5,9 @@
  *  - Reads approved rows from the sheet TAB named by SHEET_NAME below (not
  *    the spreadsheet FILE's name — those are two different things) and
  *    serves them as JSON (this is what the website calls to display reviews).
- *  - Accepts new testimonials posted from the site's admin panel, but only
- *    when the request carries the correct ADMIN_TOKEN — so only the doctor,
- *    who knows the token, can add one this way. Anyone can still add a row
- *    by typing directly into the Google Sheet itself, in that same tab.
+ *  - Accepts new testimonials posted from the site's public "Write a review"
+ *    form — no login required, they publish immediately. Anyone can also add
+ *    a row by typing directly into the Google Sheet itself, in that same tab.
  *
  * Setup: see README.md in the project root ("Connect Google Sheets").
  */
@@ -64,8 +63,9 @@ function doGet(e) {
 
 /**
  * POST body (as text/plain JSON, to avoid CORS preflight — see README):
- *   { "token": "...", "name": "...", "role": "...", "rating": 5, "text": "..." }
- * Row is appended with Status "approved" only when the token matches.
+ *   { "name": "...", "role": "...", "rating": 5, "text": "..." }
+ * Open to anyone — no login required. Row is appended with Status "approved"
+ * so it appears on the site immediately.
  */
 function doPost(e) {
   let body;
@@ -75,19 +75,14 @@ function doPost(e) {
     return jsonOut_({ ok: false, error: "Invalid request body." });
   }
 
-  const adminToken = PropertiesService.getScriptProperties().getProperty("ADMIN_TOKEN");
-  if (!adminToken || body.token !== adminToken) {
-    return jsonOut_({ ok: false, error: "Unauthorized." });
-  }
-
-  const name = String(body.name || "").trim();
-  const text = String(body.text || "").trim();
+  const name = String(body.name || "").trim().slice(0, 80);
+  const text = String(body.text || "").trim().slice(0, 1000);
   if (!name || !text) {
-    return jsonOut_({ ok: false, error: "Name and testimonial text are required." });
+    return jsonOut_({ ok: false, error: "Name and review text are required." });
   }
 
   const rating = Math.max(1, Math.min(5, Number(body.rating) || 5));
-  const role = String(body.role || "").trim();
+  const role = String(body.role || "").trim().slice(0, 80);
 
   const sheet = getSheet_();
   sheet.appendRow([new Date(), name, role, rating, text, "approved"]);

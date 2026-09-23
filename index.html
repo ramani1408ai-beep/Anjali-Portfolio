@@ -159,7 +159,10 @@
             <p class="eyebrow">Patient voices</p>
             <h2>Testimonials</h2>
           </div>
-          <button class="btn btn-ghost btn-sm" id="openAdminBtn">Doctor: manage testimonials</button>
+          <button class="btn btn-primary btn-sm" id="openReviewBtn">
+            <span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.7 14.7 9l6.6.9-4.8 4.6 1.2 6.6L12 17.9 6.3 21.1l1.2-6.6-4.8-4.6L9.3 9 12 2.7Z"/></svg></span>
+            Write a review
+          </button>
         </div>
         <div class="testi-grid" id="testiGrid">
           <div class="testi-loading">Loading testimonials…</div>
@@ -185,59 +188,43 @@
   </main>
 
   <footer class="site">
-    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%;">
+    <div class="wrap">
       <span>© <span id="year"></span> Dr. Anjali C. All rights reserved.</span>
-      <button class="admin-link" id="openAdminLinkBtn">Doctor login</button>
     </div>
   </footer>
 
-  <!-- Admin: passcode gate -->
-  <div class="modal-backdrop" id="passcodeModal" hidden>
+  <!-- Write a review -->
+  <div class="modal-backdrop" id="reviewModal" hidden>
     <div class="modal">
       <button class="modal-close" data-close aria-label="Close"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></button>
-      <h3>Doctor login</h3>
-      <p class="sub">Enter your passcode to manage testimonials. This gate is basic client-side protection — see README for how it works.</p>
+      <h3>Write a review</h3>
+      <p class="sub">Your review is saved directly and will appear here right away.</p>
       <div class="field">
-        <label for="passcodeInput">Passcode</label>
-        <input type="password" id="passcodeInput" autocomplete="off" />
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-ghost btn-sm" data-close>Cancel</button>
-        <button class="btn btn-primary btn-sm" id="passcodeSubmit">Unlock</button>
-      </div>
-      <p class="modal-status" id="passcodeStatus"></p>
-    </div>
-  </div>
-
-  <!-- Admin: manage testimonials -->
-  <div class="modal-backdrop" id="adminModal" hidden>
-    <div class="modal">
-      <button class="modal-close" data-close aria-label="Close"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></button>
-      <h3>Add a testimonial</h3>
-      <p class="sub">Saved straight to your Google Sheet — visible on the site the next time it loads.</p>
-      <div class="field">
-        <label for="tName">Patient name</label>
+        <label for="tName">Your name</label>
         <input type="text" id="tName" placeholder="e.g. Fatima R." />
       </div>
       <div class="field">
-        <label for="tRole">Context (optional)</label>
+        <label for="tRole">Relation to Dr. Anjali (optional)</label>
         <input type="text" id="tRole" placeholder="e.g. Patient, Dubai" />
       </div>
       <div class="field">
-        <label for="tRating">Rating</label>
-        <select id="tRating">
-          <option value="5">★★★★★ (5)</option>
-          <option value="4">★★★★☆ (4)</option>
-          <option value="3">★★★☆☆ (3)</option>
-        </select>
+        <label id="tRatingLabel">Your rating</label>
+        <div class="star-picker" role="radiogroup" aria-labelledby="tRatingLabel" id="tRatingPicker">
+          <button type="button" class="star-btn" data-value="5" role="radio" aria-label="5 stars"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.7 14.7 9l6.6.9-4.8 4.6 1.2 6.6L12 17.9 6.3 21.1l1.2-6.6-4.8-4.6L9.3 9 12 2.7Z"/></svg></span></button>
+          <button type="button" class="star-btn" data-value="4" role="radio" aria-label="4 stars"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.7 14.7 9l6.6.9-4.8 4.6 1.2 6.6L12 17.9 6.3 21.1l1.2-6.6-4.8-4.6L9.3 9 12 2.7Z"/></svg></span></button>
+          <button type="button" class="star-btn" data-value="3" role="radio" aria-label="3 stars"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.7 14.7 9l6.6.9-4.8 4.6 1.2 6.6L12 17.9 6.3 21.1l1.2-6.6-4.8-4.6L9.3 9 12 2.7Z"/></svg></span></button>
+          <button type="button" class="star-btn" data-value="2" role="radio" aria-label="2 stars"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.7 14.7 9l6.6.9-4.8 4.6 1.2 6.6L12 17.9 6.3 21.1l1.2-6.6-4.8-4.6L9.3 9 12 2.7Z"/></svg></span></button>
+          <button type="button" class="star-btn" data-value="1" role="radio" aria-label="1 star"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.7 14.7 9l6.6.9-4.8 4.6 1.2 6.6L12 17.9 6.3 21.1l1.2-6.6-4.8-4.6L9.3 9 12 2.7Z"/></svg></span></button>
+        </div>
+        <input type="hidden" id="tRating" value="5" />
       </div>
       <div class="field">
-        <label for="tText">Testimonial</label>
-        <textarea id="tText" placeholder="What did the patient say?"></textarea>
+        <label for="tText">Your review</label>
+        <textarea id="tText" placeholder="Share your experience…"></textarea>
       </div>
       <div class="modal-actions">
         <button class="btn btn-ghost btn-sm" data-close>Cancel</button>
-        <button class="btn btn-accent btn-sm" id="tSubmit">Add testimonial</button>
+        <button class="btn btn-accent btn-sm" id="tSubmit">Submit review</button>
       </div>
       <p class="modal-status" id="adminStatus"></p>
     </div>
