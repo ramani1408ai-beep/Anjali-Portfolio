@@ -11,5 +11,5 @@ const SITE_CONFIG = {
   // Generate it by opening this site, pressing F12 for the console, and running:
   //   await hashPasscode("your-chosen-passcode")
   // then paste the printed hash below. Change it any time by repeating this.
-  adminPasscodeHash: "b99125ddb4eaaf924b577547da8fcf8b07d8fa8c010ef165747cabb5ad0651ac",
+  adminPasscodeHash: "755e76db6bf081c79be6fddc93b8b18eb173aec739c15a6679b58b68c0d37a87",
 };
