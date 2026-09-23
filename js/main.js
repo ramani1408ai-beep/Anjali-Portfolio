@@ -239,6 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupNav();
   setupHeaderScroll();
   setupReviewUI();
+  setupBookingUI();
   setupParallax();
   loadTestimonials();
   initRevealObserver();

@@ -56,12 +56,12 @@ function escapeHtml(str) {
 
 async function loadTestimonials() {
   const grid = document.getElementById("testiGrid");
-  if (!SITE_CONFIG.testimonialsApiUrl) {
+  if (!SITE_CONFIG.sheetsApiUrl) {
     renderTestimonials(SAMPLE_TESTIMONIALS);
     return;
   }
   try {
-    const res = await fetch(`${SITE_CONFIG.testimonialsApiUrl}?action=list`);
+    const res = await fetch(`${SITE_CONFIG.sheetsApiUrl}?action=list`);
     const data = await res.json();
     if (data.ok && Array.isArray(data.testimonials) && data.testimonials.length) {
       renderTestimonials(data.testimonials);
@@ -120,7 +120,7 @@ function setupReviewUI() {
     const rating = document.getElementById("tRating").value;
     const text = document.getElementById("tText").value.trim();
 
-    if (!SITE_CONFIG.testimonialsApiUrl) {
+    if (!SITE_CONFIG.sheetsApiUrl) {
       status.textContent = "Google Sheets isn't connected yet — see README.md → 'Connect Google Sheets'.";
       status.className = "modal-status error";
       return;
@@ -135,10 +135,10 @@ function setupReviewUI() {
     status.className = "modal-status";
     try {
       // text/plain avoids a CORS preflight against the Apps Script endpoint.
-      const res = await fetch(SITE_CONFIG.testimonialsApiUrl, {
+      const res = await fetch(SITE_CONFIG.sheetsApiUrl, {
         method: "POST",
         headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify({ name, role, rating, text }),
+        body: JSON.stringify({ type: "review", name, role, rating, text }),
       });
       const data = await res.json();
       if (data.ok) {

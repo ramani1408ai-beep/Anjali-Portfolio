@@ -42,11 +42,6 @@
         <div class="hero-stage">
           <div class="hero-bgshape" aria-hidden="true"></div>
 
-          <div class="hero-secondary-card" aria-hidden="true">
-            <p>Compassionate Care, Built Around You</p>
-            <span>Evidence-based primary, women's health &amp; emergency medicine.</span>
-          </div>
-
           <div class="hero-portrait-col">
             <span class="hero-ghost-text" aria-hidden="true">ANJALI</span>
             <div class="hero-portrait-frame">
@@ -73,7 +68,7 @@
             <div class="hero-meta" id="heroMeta"></div>
 
             <div class="hero-actions">
-              <a href="#contact" class="btn btn-primary">Book a Consultation <span class="icon btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></span></a>
+              <button type="button" class="btn btn-primary" id="openBookingBtn">Book a Consultation <span class="icon btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></span></button>
               <a href="#experience" class="btn btn-ghost">More About Me <span class="icon btn-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7"/><path d="M9 7h8v8"/></svg></span></a>
             </div>
           </div>
@@ -230,10 +225,54 @@
     </div>
   </div>
 
+  <!-- Book a consultation -->
+  <div class="modal-backdrop" id="bookingModal" hidden>
+    <div class="modal">
+      <button class="modal-close" data-close aria-label="Close"><span class="icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></span></button>
+      <h3>Book a consultation</h3>
+      <p class="sub">Send your details and Dr. Anjali's clinic will contact you to confirm a time.</p>
+      <div class="field">
+        <label for="bName">Full name</label>
+        <input type="text" id="bName" placeholder="Your name" />
+      </div>
+      <div class="field">
+        <label for="bPhone">Phone number</label>
+        <input type="tel" id="bPhone" placeholder="+971 5X XXX XXXX" />
+      </div>
+      <div class="field">
+        <label for="bEmail">Email (optional)</label>
+        <input type="email" id="bEmail" placeholder="you@example.com" />
+      </div>
+      <div class="field">
+        <label for="bDate">Preferred date (optional)</label>
+        <input type="date" id="bDate" />
+      </div>
+      <div class="field">
+        <label for="bTime">Preferred time (optional)</label>
+        <select id="bTime">
+          <option value="">Any time</option>
+          <option value="Morning">Morning</option>
+          <option value="Afternoon">Afternoon</option>
+          <option value="Evening">Evening</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="bNotes">Reason for visit (optional)</label>
+        <textarea id="bNotes" placeholder="Briefly tell us what this is about…"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost btn-sm" data-close>Cancel</button>
+        <button class="btn btn-primary btn-sm" id="bSubmit">Send request</button>
+      </div>
+      <p class="modal-status" id="bookingStatus"></p>
+    </div>
+  </div>
+
   <script src="js/icons.js"></script>
   <script src="js/data.js"></script>
   <script src="js/config.js"></script>
   <script src="js/testimonials.js"></script>
+  <script src="js/booking.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
