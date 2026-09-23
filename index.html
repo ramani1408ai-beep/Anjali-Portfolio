@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Dr. Anjali C — General Practitioner</title>
+  <meta name="description" content="Portfolio of Dr. Anjali C, DHA-licensed General Practitioner in Dubai, UAE — primary care, women's health and emergency medicine." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&family=Work+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <header class="site">
+    <nav class="wrap nav">
+      <a href="#top" class="brand">
+        <span class="brand-mark">AC</span>
+        <span>Dr. Anjali C</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about">About</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#achievements">Achievements</a></li>
+        <li><a href="#credentials">Credentials</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-primary btn-sm">Get in touch</a>
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">DHA-Licensed General Practitioner</p>
+          <h1 id="heroName">Dr. Anjali C</h1>
+          <p class="role" id="heroRole">Primary Care · Women's Health · Emergency Medicine</p>
+          <p class="tagline" id="heroTagline"></p>
+
+          <div class="hero-meta" id="heroMeta"></div>
+
+          <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">Book a consultation</a>
+            <a href="#experience" class="btn btn-ghost">View experience</a>
+          </div>
+        </div>
+
+        <div class="hero-portrait">
+          <!-- Drop your photo in as assets/images/profile.jpg — it will replace this placeholder automatically. -->
+          <img src="assets/images/profile.jpg" alt="Portrait of Dr. Anjali C"
+               onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+          <div class="portrait-fallback" style="display:flex;">
+            <span class="initials">AC</span>
+            <small>Add assets/images/profile.jpg to show your photo here</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats" style="padding-block:40px; border-top:none;">
+      <div class="wrap stats-grid" id="statsGrid"></div>
+    </section>
+
+    <!-- About + Competencies -->
+    <section id="about">
+      <div class="wrap about-grid">
+        <div>
+          <p class="eyebrow">Profile</p>
+          <h2>Patient-first medicine, built on evidence</h2>
+          <p id="profileText"></p>
+        </div>
+        <div class="competency-list" id="competencyList"></div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Career</p>
+          <h2>Professional experience</h2>
+        </div>
+        <div class="timeline" id="experienceTimeline"></div>
+
+        <div class="section-head" style="margin-top:64px;">
+          <p class="eyebrow">Clinical exposure</p>
+          <h2>Attachments &amp; observerships</h2>
+        </div>
+        <div class="timeline" id="attachmentsTimeline"></div>
+      </div>
+    </section>
+
+    <!-- Achievements -->
+    <section id="achievements">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Impact</p>
+          <h2>Key achievements</h2>
+        </div>
+        <div class="achv-grid" id="achvGrid"></div>
+      </div>
+    </section>
+
+    <!-- Credentials -->
+    <section id="credentials">
+      <div class="wrap">
+        <div class="section-head">
+          <p class="eyebrow">Credentials</p>
+          <h2>Education, licensing &amp; development</h2>
+        </div>
+        <div class="cred-grid">
+          <div class="cred-col">
+            <h3>Education</h3>
+            <ul id="educationList"></ul>
+          </div>
+          <div class="cred-col">
+            <h3>Licensing</h3>
+            <ul id="licensingList"></ul>
+          </div>
+          <div class="cred-col">
+            <h3>CME &amp; Languages</h3>
+            <ul id="cmeList"></ul>
+            <div class="lang-row" id="langRow"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials">
+      <div class="wrap">
+        <div class="testi-head">
+          <div>
+            <p class="eyebrow">Patient voices</p>
+            <h2>Testimonials</h2>
+          </div>
+          <button class="btn btn-ghost btn-sm" id="openAdminBtn">Doctor: manage testimonials</button>
+        </div>
+        <div class="testi-grid" id="testiGrid">
+          <div class="testi-loading">Loading testimonials…</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+      <div class="wrap contact-grid">
+        <div>
+          <p class="eyebrow">Get in touch</p>
+          <h2>Let's talk about your care</h2>
+          <p>Based in Dubai, UAE. Reach out directly for appointments, referrals or collaboration.</p>
+        </div>
+        <div class="contact-card">
+          <h3>Contact details</h3>
+          <p>Usually responds within one business day.</p>
+          <ul class="contact-list" id="contactList"></ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; width:100%;">
+      <span>© <span id="year"></span> Dr. Anjali C. All rights reserved.</span>
+      <button class="admin-link" id="openAdminLinkBtn">Doctor login</button>
+    </div>
+  </footer>
+
+  <!-- Admin: passcode gate -->
+  <div class="modal-backdrop" id="passcodeModal" hidden>
+    <div class="modal">
+      <button class="modal-close" data-close>&times;</button>
+      <h3>Doctor login</h3>
+      <p class="sub">Enter your passcode to manage testimonials. This gate is basic client-side protection — see README for how it works.</p>
+      <div class="field">
+        <label for="passcodeInput">Passcode</label>
+        <input type="password" id="passcodeInput" autocomplete="off" />
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost btn-sm" data-close>Cancel</button>
+        <button class="btn btn-primary btn-sm" id="passcodeSubmit">Unlock</button>
+      </div>
+      <p class="modal-status" id="passcodeStatus"></p>
+    </div>
+  </div>
+
+  <!-- Admin: manage testimonials -->
+  <div class="modal-backdrop" id="adminModal" hidden>
+    <div class="modal">
+      <button class="modal-close" data-close>&times;</button>
+      <h3>Add a testimonial</h3>
+      <p class="sub">Saved straight to your Google Sheet — visible on the site the next time it loads.</p>
+      <div class="field">
+        <label for="tName">Patient name</label>
+        <input type="text" id="tName" placeholder="e.g. Fatima R." />
+      </div>
+      <div class="field">
+        <label for="tRole">Context (optional)</label>
+        <input type="text" id="tRole" placeholder="e.g. Patient, Dubai" />
+      </div>
+      <div class="field">
+        <label for="tRating">Rating</label>
+        <select id="tRating">
+          <option value="5">★★★★★ (5)</option>
+          <option value="4">★★★★☆ (4)</option>
+          <option value="3">★★★☆☆ (3)</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="tText">Testimonial</label>
+        <textarea id="tText" placeholder="What did the patient say?"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn btn-ghost btn-sm" data-close>Cancel</button>
+        <button class="btn btn-accent btn-sm" id="tSubmit">Add testimonial</button>
+      </div>
+      <p class="modal-status" id="adminStatus"></p>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/config.js"></script>
+  <script src="js/testimonials.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
