@@ -45,6 +45,15 @@ directly) and the site's doctor-only "Manage testimonials" panel write to the
    placeholder code and paste in the contents of `apps-script/Code.gs` from
    this repo. Save the project (name it anything).
 
+   The script will auto-create a **tab** (bottom of the spreadsheet) called
+   `Anjali Testimonials` the first time it runs — that tab name is set by the
+   `SHEET_NAME` constant near the top of `Code.gs`, and is unrelated to what
+   you named the spreadsheet **file** in step 1. All testimonial rows —
+   whether typed in directly or added through the site's admin panel — must
+   live in that exact tab, or they won't show up on the site. If you ever
+   change `SHEET_NAME`, you must also redeploy (see step 4's note on
+   redeploying after code changes) before it takes effect.
+
 3. **Set your admin passcode.** Pick one passcode (e.g. a short phrase only
    you know). In the Apps Script editor: `Project Settings` (gear icon, left
    sidebar) → `Script Properties` → `Add script property` → name it
@@ -59,6 +68,11 @@ directly) and the site's doctor-only "Manage testimonials" panel write to the
    Click `Deploy`, authorize the script when prompted (it's your own script,
    acting on your own sheet), and copy the **Web app URL** it gives you
    (ends in `/exec`).
+
+   **If you edit `Code.gs` later**, saving alone isn't enough — the live
+   `/exec` URL keeps serving whatever was deployed. Go to
+   `Deploy → Manage deployments`, click the pencil icon on your deployment,
+   set Version to **New version**, then `Deploy` again.
 
 5. **Wire it into the site.** Open `js/config.js` and paste the URL into
    `testimonialsApiUrl`.

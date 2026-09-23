@@ -2,17 +2,18 @@
  * Google Apps Script backend for the testimonials on Dr. Anjali's portfolio.
  *
  * What this does:
- *  - Reads approved rows from the "Testimonials" sheet and serves them as JSON
- *    (this is what the website calls to display reviews).
+ *  - Reads approved rows from the sheet TAB named by SHEET_NAME below (not
+ *    the spreadsheet FILE's name — those are two different things) and
+ *    serves them as JSON (this is what the website calls to display reviews).
  *  - Accepts new testimonials posted from the site's admin panel, but only
  *    when the request carries the correct ADMIN_TOKEN — so only the doctor,
  *    who knows the token, can add one this way. Anyone can still add a row
- *    by typing directly into the Google Sheet itself.
+ *    by typing directly into the Google Sheet itself, in that same tab.
  *
  * Setup: see README.md in the project root ("Connect Google Sheets").
  */
 
-const SHEET_NAME = "Testimonials";
+const SHEET_NAME = "Anjali Testimonials";
 const HEADERS = ["Timestamp", "Name", "Role", "Rating", "Text", "Status"];
 
 function getSheet_() {
